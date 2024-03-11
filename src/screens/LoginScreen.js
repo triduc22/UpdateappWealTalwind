@@ -33,6 +33,7 @@ export default function LoginScreen() {
 
   //Process show red text
   const [isEmailFilled, setIsEmailFilled] = useState(true);
+  const [isPasswordFilled, setIsPasswordFilled] = useState(true);
 
   /*Process for show/hide password */
   const [showPassword, setShowPassword] = useState(false);
@@ -214,9 +215,9 @@ export default function LoginScreen() {
               /*Process to add Firebase Authentication */
               value={email}
               // onChangeText={value => setEmail(value)}
-              onChangeText={newText => {
-                setEmail(newText);
-                setIsEmailFilled(newText.trim() !== '');
+              onChangeText={value => {
+                setEmail(value);
+                setIsEmailFilled(value.trim() !== '');
               }}
               placeholder={t('enter-Email')}
             />
@@ -225,18 +226,20 @@ export default function LoginScreen() {
             {!isEmailFilled && (
               <View
                 style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  // justifyContent: 'center',
+                  // alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  alignItems: 'baseline',
                   // paddingTop: 0.5,
                   paddingTop: hp(1),
-                  paddingBottom: hp(3)
+                  paddingBottom: hp(3),
                 }}>
                 <Text
                   style={{
                     color: 'red',
                     fontSize: 13,
                   }}>
-                  Please enter your email address
+                  {t('redtext')}
                 </Text>
               </View>
             )}
@@ -258,9 +261,35 @@ export default function LoginScreen() {
                 }}
                 secureTextEntry={!showPassword}
                 value={password}
-                onChangeText={value => setPassword(value)}
+                // onChangeText={value => setPassword(value)}
+                onChangeText={value => {
+                  setPassword(value);
+                  setIsPasswordFilled(value.trim() !== '');
+                }}
                 placeholder={t('enter-Password')}
               />
+
+              {/* Process show red text */}
+              {!isPasswordFilled && (
+                <View
+                  style={{
+                    // justifyContent: 'center',
+                    // alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    alignItems: 'baseline',
+                    fontSize: 10,
+                    // marginTop: -25,
+                    marginTop: hp(-2.5),
+                  }}>
+                  <Text
+                    style={{
+                      color: 'red',
+                      fontSize: 13,
+                    }}>
+                    {t('redtextpass')}
+                  </Text>
+                </View>
+              )}
 
               {/*Process show/hide for Password */}
               <TouchableOpacity
@@ -289,7 +318,7 @@ export default function LoginScreen() {
               <Text
                 style={{
                   color: 'rgb(55, 65, 81)',
-                  marginVertical: hp(-3),
+                  marginVertical: hp(-2.5),
                 }}>
                 {t('forgot-Password')}
               </Text>

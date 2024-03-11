@@ -10,6 +10,8 @@
     "enter-Password": "Enter Password",
     "log-In": "Login",
     "forgot-Password": "Forgot Password?",
-    "title-do not Account": "Don't have an account?"
+    "title-do not Account": "Don't have an account?",
+    "redtext": "Please enter your email address!!",
+    "redtextpass": "Please enter your password!!"
 
 }

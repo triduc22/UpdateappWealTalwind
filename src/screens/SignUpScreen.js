@@ -29,6 +29,10 @@ export default function SignUpScreen() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  //Process show red text
+  const [isEmailFilled, setIsEmailFilled] = useState(true);
+  const [isPasswordFilled, setIsPasswordFilled] = useState(true);
+
   // Function to check if the password meets your requirements.
   const isPasswordValid = password => {
     // Process to make at least 8 characters {8,} and contains at least one digit, one uppercase letter, and one special character.
@@ -171,9 +175,35 @@ export default function SignUpScreen() {
                 marginVertical: 10,
               }}
               value={email}
-              onChangeText={value => setEmail(value)}
+              // onChangeText={value => setEmail(value)}
+              onChangeText={value => {
+                setEmail(value);
+                setIsEmailFilled(value.trim() !== '');
+              }}
               placeholder={t('enter-Email')}
             />
+
+            {/* Process show red text */}
+            {!isEmailFilled && (
+              <View
+                style={{
+                  // justifyContent: 'center',
+                  // alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  alignItems: 'baseline',
+                  // paddingTop: 0.5,
+                  paddingTop: hp(1),
+                  paddingBottom: hp(3),
+                }}>
+                <Text
+                  style={{
+                    color: 'red',
+                    fontSize: 13,
+                  }}>
+                  {t('redtext')}
+                </Text>
+              </View>
+            )}
 
             <Text style={{color: 'rgb(55, 65, 81)', marginLeft: 15}}>
               {t('password')}
@@ -186,18 +216,46 @@ export default function SignUpScreen() {
                   backgroundColor: 'rgb(243, 244, 246)',
                   color: 'rgb(55, 65, 81)',
                   borderRadius: 12,
-                  marginBottom: 45,
-                  marginVertical: 10,
+                  // marginBottom: 45,
+                  marginBottom: hp(5),
+                  // marginVertical: 10,
+                  marginVertical: hp(1),
                 }}
                 secureTextEntry={!showPassword}
                 value={password}
-                onChangeText={value => setPassword(value)}
+                // onChangeText={value => setPassword(value)}
+                onChangeText={value => {
+                  setPassword(value);
+                  setIsPasswordFilled(value.trim() !== '');
+                }}
                 placeholder={t('enter-Password')}
               />
 
+              {/* Process show red text */}
+              {!isPasswordFilled && (
+                <View
+                  style={{
+                    // justifyContent: 'center',
+                    // alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    alignItems: 'baseline',
+                    fontSize: 10,
+                    // marginTop: -25,
+                    marginTop: hp(-2.5),
+                  }}>
+                  <Text
+                    style={{
+                      color: 'red',
+                      fontSize: 13,
+                    }}>
+                    {t('redtextpass')}
+                  </Text>
+                </View>
+              )}
+
               {/* Process show/hide for Password */}
               <TouchableOpacity
-                style={{position: 'absolute', right: 16, marginVertical: 20}}
+                style={{position: 'absolute', right: 16, marginVertical: hp(2)}}
                 onPress={() => setShowPassword(!showPassword)}>
                 <Image
                   source={
@@ -216,6 +274,7 @@ export default function SignUpScreen() {
                 padding: 12,
                 backgroundColor: 'rgb(250, 204, 21)',
                 borderRadius: 12,
+                marginTop: hp(2)
               }}
               onPress={handleSubmit}>
               <Text
@@ -224,6 +283,7 @@ export default function SignUpScreen() {
                   fontWeight: 'bold',
                   textAlign: 'center',
                   color: 'rgb(55, 65, 81)',
+                 
                 }}>
                 {t('sign-Up')}
               </Text>

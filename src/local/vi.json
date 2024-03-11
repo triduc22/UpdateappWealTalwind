@@ -10,8 +10,9 @@
     "enter-Password": "Nhập mật khẩu ",
     "log-In": "Đăng Nhập",
     "forgot-Password": "Quên Mật Khẩu?",
-    "title-do not Account": "Chưa có tài khoản?"
- 
+    "title-do not Account": "Chưa có tài khoản?",
+    "redtext": "Hãy điền địa chỉ email của bạn!!",
+    "redtextpass": "Vui lòng nhập mật khẩu của bạn!!" 
 
 
 }
