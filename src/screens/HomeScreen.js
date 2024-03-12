@@ -28,6 +28,11 @@ import {CalendarDaysIcon, MapPinIcon} from 'react-native-heroicons/solid';
 import {fetchLocations, fetchWeatherForecast} from '../api/weather';
 import {weatherImages} from '../constants';
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+
 export default function HomeScreen() {
   {
     /*Process hide text "Search bar" */
@@ -133,10 +138,10 @@ export default function HomeScreen() {
 
   const handleTextDebounce = useCallback(debounce(handleSearch, 1200), []);
 
-  const windowHeight = Dimensions.get('window').height;
-  const percentHeight = parseInt(windowHeight / 100);
-  const test = (windowHeight * percentHeight) / 100;
-  const testHeight = `${(test + 70 - 100) / 2}%`;
+  // const windowHeight = Dimensions.get('window').height;
+  // const percentHeight = parseInt(windowHeight / 100);
+  // const test = (windowHeight * percentHeight) / 100;
+  // const testHeight = `${(test + 70 - 100) / 2}%`;
 
   // console.log('windowHeight', windowHeight);
   // console.log('windowHeight', testHeight);
@@ -145,7 +150,8 @@ export default function HomeScreen() {
   const {current, location} = weather;
 
   return (
-    <View className="flex-1 relative">
+    // <View className="flex-1 relative">
+    <View style={{flex: 1, position: 'relative'}}>
       {/*Xly thanh bar ngay cột sóng */}
       <StatusBar style="light" />
 
@@ -153,12 +159,20 @@ export default function HomeScreen() {
       <Image
         blurRadius={70}
         source={require('../../assets/images/bg.png')}
-        className="absolute h-full w-full"
+        // className="absolute h-full w-full"
+        style={{position: 'absolute', height: '100%', width: '100%'}}
       />
 
       {/*Process for loading with react-native-progress */}
       {loading ? (
-        <View className="flex-1 flex-row justify-center items-center">
+        // <View className="flex-1 flex-row justify-center items-center">F
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           {/*Process for loading to show Loading... */
           /*<Text className="text-white text-4xl">Loading...</Text>*/}
 
@@ -167,23 +181,49 @@ export default function HomeScreen() {
         </View>
       ) : (
         /*Process show status bar search */
-        <KeyboardAwareScrollView className="flex flex-1 mt-4 ">
+        // <KeyboardAwareScrollView className="flex flex-1 mt-4 ">
+        <KeyboardAwareScrollView
+          style={{
+            display: 'flex',
+            flex: 1,
+            marginTop: hp(2),
+          }}>
           {/*Search section*/}
-          <View
+          {/* <View
             style={{
               height: '7%',
             }}
-            className="mx-4 relative z-50">
+            className="mx-4 relative z-50"
+            > */}
+          <View
+            style={{
+              height: '7%',
+              marginHorizontal: hp(1),
+              position: 'relative',
+              zIndex: 50,
+            }}>
             <View
-              className="flex-row justify-end items-center rounded-full"
-              /*Process hide/show text "Search bar" after click icon search (transparent: màu trog suốt)*/
+              // className="flex-row justify-end items-center rounded-full"
+              // /*Process hide/show text "Search bar" after click icon search (transparent: màu trog suốt)*/
+              // style={{
+              //   backgroundColor: showSearch
+              //     ? theme.bgWhite(0.2)
+              //     : 'transparent',
+              // }}>
+
               style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                borderRadius: 999,
+
+                /*Process hide text "Search bar" */
                 backgroundColor: showSearch
                   ? theme.bgWhite(0.2)
                   : 'transparent',
               }}>
               {/*Process hide text "Search bar" */}
-              {showSearch ? (
+              {/* {showSearch ? (
                 <TextInput
                   // onChangeText={handleSearch}
                   onChangeText={handleTextDebounce}
@@ -192,14 +232,36 @@ export default function HomeScreen() {
                   //Css for text "Search City"
                   className=" pl-6 h-10 pb-1 flex-1 text-base text-white "
                 />
+              ) : null} */}
+
+              {showSearch ? (
+                <TextInput
+                  onChangeText={handleTextDebounce}
+                  placeholder="Search city"
+                  placeholderTextColor={'lightgray'}
+                  style={{
+                    paddingLeft: 6,
+                    height: 40,
+                    paddingBottom: 1,
+                    flex: 1,
+                    fontSize: 16,
+                    color: 'white',
+                  }}
+                />
               ) : null}
 
               {/*Nút tìm kiếm */}
               <TouchableOpacity
                 /*Process hide/show text "Search bar" after click icon search (use !showSearch) */
                 onPress={() => toggleSearch(!showSearch)}
-                className="rounded-full p-3 m-1"
-                style={{backgroundColor: theme.bgWhite(0.3)}}>
+                // className="rounded-full p-3 m-1"
+                // style={{backgroundColor: theme.bgWhite(0.3)}}>
+                style={{
+                  borderRadius: 999,
+                  padding: 8,
+                  margin: 4,
+                  backgroundColor: theme.bgWhite(0.3),
+                }}>
                 {/*<Text>Icon</Text> */}
                 <MagnifyingGlassIcon size="25" color="white" />
               </TouchableOpacity>
@@ -338,7 +400,8 @@ export default function HomeScreen() {
             </View>
           </View>
           {/*Forecast for the next days */}
-          <View style={{marginTop: testHeight}} className=" space-y-3">
+          {/* <View style={{marginTop: testHeight}} className=" space-y-3"> */}
+          <View className=" space-y-3">
             {/*Process show icon calendar */}
             <View className="flex-row items-center mx-5 space-x-2">
               <CalendarDaysIcon size="22" color="white" />
