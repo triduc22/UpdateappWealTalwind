@@ -242,7 +242,7 @@ export default function HomeScreen() {
                   style={{
                     paddingLeft: 6,
                     height: 40,
-                    paddingBottom: 1,
+                    paddingBottom: hp(1),
                     flex: 1,
                     fontSize: 16,
                     color: 'white',
@@ -269,7 +269,15 @@ export default function HomeScreen() {
 
             {/*Process hide/show text "London, United Kingdom" after click icon search */}
             {locations.length > 0 && showSearch ? (
-              <View className="absolute w-full bg-gray-300 top-16 rounded-3xl">
+              // <View className="absolute w-full bg-gray-300 top-16 rounded-3xl">
+              <View
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  backgroundColor: 'rgb(203, 213, 225)',
+                  top: 64,
+                  borderRadius: 24,
+                }}>
                 {locations.map((loc, index) => {
                   let showBorder = index + 1 != locations.length;
 
@@ -277,16 +285,27 @@ export default function HomeScreen() {
                     /*Process border(bo viền) for hide/show text "London, United Kingdom" after click icon search */
                   }
                   let borderClass = showBorder
-                    ? ' border-b-2 border-b-gray-400'
-                    : '';
+                    ? // ? ' border-b-2 border-b-gray-400'
+                      // : '';
+                      {borderBottomWidth: 2, borderBottomColor: '#A0AEC0'}
+                    : {};
                   return (
                     <TouchableOpacity
                       onPress={() => handleLocation(loc)}
                       key={index}
-                      className={
-                        'flex-row items-center border-0 p-3 px-4 mb-1' +
-                        borderClass
-                      }>
+                      // className={
+                      //   'flex-row items-center border-0 p-3 px-4 mb-1' +
+                      //   borderClass
+                      // }>
+
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        padding: 8,
+                        paddingHorizontal: 16,
+                        marginBottom: 8,
+                        ...(borderClass && {borderWidth: 0}),
+                      }}>
                       {/*Process show icon map pin next to text "London, United Kingdom" */}
                       <MapPinIcon size="20" color="gray" />
 
@@ -297,7 +316,15 @@ export default function HomeScreen() {
                     // </Text> */}
 
                       {/*Process show name after type name and show after click*/}
-                      <Text className="text-black text-lg font-medium ml-2 ">
+                      {/* <Text className="text-black text-lg font-medium ml-2 "> */}
+                      <Text
+                        style={{
+                          color: 'rgb(0, 0, 0)',
+                          fontSize: 18,
+                          lineHeight: 28,
+                          fontWeight: '500',
+                          marginLeft: 8,
+                        }}>
                         {loc?.name}, {loc?.country}
                       </Text>
                     </TouchableOpacity>
@@ -309,7 +336,16 @@ export default function HomeScreen() {
 
           {/*Nguyên Khung hiện trong background*/}
           {/*Process choose for forecast section*/}
-          <View className="mx-4 flex justify-around flex-1 mt-5 ">
+          {/* <View className="mx-4 flex justify-around flex-1 mt-5 "> */}
+          <View
+            style={{
+              marginLeft: 16,
+              marginRight: 16,
+              display: 'flex',
+              justifyContent: 'space-around',
+              flex: 1,
+              marginTop: 20,
+            }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -317,21 +353,44 @@ export default function HomeScreen() {
                 alignItems: 'flex-end',
               }}>
               {/*location + Text Name default before call Api*/}
-              <Text className="text-white text-center text-2xl font-bold ">
+              {/* <Text className="text-white text-center text-2xl font-bold "> */}
+              <Text
+                style={{
+                  color: 'rgb(255, 255, 255)',
+                  textAlign: 'center',
+                  fontSize: 24,
+                  lineHeight: 32,
+                  fontWeight: '700',
+                }}>
                 {/*London, */}
                 {/*Show info after call api when type name and click it */}
                 {location?.name},
               </Text>
               <Text
-                className="text-lg font-semibold text-gray-300"
-                style={{marginLeft: 5, alignSelf: 'flex-end'}}>
+                // className="text-lg font-semibold text-gray-300"
+                // style={{marginLeft: 5, alignSelf: 'flex-end'}}>
+                style={{
+                  fontSize: 18,
+                  lineHeight: 28,
+                  fontWeight: '600',
+                  color: '#ccc',
+                  marginLeft: 5,
+                  alignSelf: 'flex-end',
+                }}>
                 {/*United Kingdom */}
                 {/*Show info after call api when type name and click it */}
                 {location?.country}
               </Text>
             </View>
             {/*Weather Image */}
-            <View className="flex-row justify-center mb-1">
+            {/* <View className="flex-row justify-center mb-1"> */}
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                // marginBottom: 4
+                marginBottom: hp(0.5),
+              }}>
               <Image
                 /*source={require('../assets/images/partlycloudy.png')}*/
 
@@ -341,20 +400,48 @@ export default function HomeScreen() {
 
                 /*Lấy icon(images) from folder constant with file index.js) */
                 source={weatherImages[current?.condition?.text]}
-                className="w-52 h-52 mb-4 mt-5"
+                // className="w-52 h-52 mb-4 mt-5"
+                style={{
+                  width: 208,
+                  height: 208,
+                  marginBottom: 16,
+                  marginTop: 20,
+                }}
               />
             </View>
 
             {/*Degree celcius */}
-            <View className="space-y-2">
-              <Text className="text-center font-bold text-white text-6xl ml-5 ">
+            {/* <View className="space-y-2"> */}
+            <View
+              style={{
+                marginBottom: 16,
+              }}>
+              {/* <Text className="text-center font-bold text-white text-6xl ml-5 "> */}
+              <Text
+                style={{
+                  textAlign: 'center',
+                  fontWeight: '700',
+                  color: 'rgb(255, 255, 255)',
+                  fontSize: 60,
+                  lineHeight: 1,
+                  marginLeft: 20,
+                }}>
                 {/*Make 23 to degree C*/}
                 {/*23&#176;*/}
                 {/*Show info after call api when type name and click it */}
                 {current?.temp_c}&#176;
               </Text>
               {/*tracking-widest like "Letter Spacing"*/}
-              <Text className="text-center text-white text-xl mb-4  tracking-widest">
+              {/* <Text className="text-center text-white text-xl mb-4  tracking-widest"> */}
+              <Text
+                style={{
+                  textAlign: 'center',
+                  color: 'rgb(255, 255, 255)',
+                  fontSize: 20,
+                  lineHeight: 28,
+                  marginBottom: 16,
+                  letterSpacing: 0.1,
+                }}>
                 {/*Partly Cloudy */}
                 {/*Show info after call api when type name and click it */}
                 {current?.condition?.text}
@@ -364,35 +451,83 @@ export default function HomeScreen() {
             {/*Other stats */}
 
             {/*Tốc Độ Gió*/}
-            <View className="flex-row justify-between mx-4">
-              <View className="flex-row space-x-2 items-center">
+            {/* <View className="flex-row justify-between mx-4"> */}
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginLeft: 16,
+                marginRight: 16,
+              }}>
+              {/* <View className="flex-row space-x-2 items-center"> */}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginLeft: 8,
+                  alignItems: 'center',
+                }}>
                 <Image
                   source={require('../../assets/icons/wind.png')}
-                  className="h-6 w-6"
+                  // className="h-6 w-6"
+                  style={{height: 24, width: 24}}
                 />
-                <Text className="text-white font-semibold text-base">
+                {/* <Text className="text-white font-semibold text-base"> */}
+                <Text
+                  style={{
+                    color: 'rgb(255, 255, 255)',
+                    fontWeight: '600',
+                    fontSize: 16,
+                    lineHeight: 24,
+                  }}>
                   {/*22km*/}
                   {current?.wind_kph}km
                 </Text>
               </View>
 
               {/*Độ Ẩm */}
-              <View className="flex-row space-x-2 items-center">
+              {/* <View className="flex-row space-x-2 items-center"> */}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginLeft: 8,
+                  alignItems: 'center',
+                }}>
                 <Image
                   source={require('../../assets/icons/drop.png')}
-                  className="h-6 w-6"
+                  // className="h-6 w-6"
+                  style={{height: 24, width: 24}}
                 />
-                <Text className="text-white font-semibold text-base">
+                {/* <Text className="text-white font-semibold text-base"> */}
+                <Text
+                  style={{
+                    color: 'rgb(255, 255, 255)',
+                    fontWeight: '600',
+                    fontSize: 16,
+                    lineHeight: 24,
+                  }}>
                   {/*23%*/}
                   {current?.humidity}%
                 </Text>
               </View>
-              <View className="flex-row space-x-2 items-center">
+              {/* <View className="flex-row space-x-2 items-center"> */}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginLeft: 8,
+                  alignItems: 'center',
+                }}>
                 <Image
                   source={require('../../assets/icons/sun.png')}
-                  className="h-6 w-6"
+                  style={{height: 24, width: 24}}
                 />
-                <Text className="text-white font-semibold text-base">
+                {/* <Text className="text-white font-semibold text-base"> */}
+                <Text
+                  style={{
+                    color: 'rgb(255, 255, 255)',
+                    fontWeight: '600',
+                    fontSize: 16,
+                    lineHeight: 24,
+                  }}>
                   {/*6:05 AM*/}
                   {weather?.forecast?.forecastday[0]?.astro?.sunrise}
                 </Text>
@@ -401,11 +536,27 @@ export default function HomeScreen() {
           </View>
           {/*Forecast for the next days */}
           {/* <View style={{marginTop: testHeight}} className=" space-y-3"> */}
-          <View className=" space-y-3">
+          {/* <View className=" space-y-3"> */}
+          <View style={{marginTop: 12}}>
             {/*Process show icon calendar */}
-            <View className="flex-row items-center mx-5 space-x-2">
+            {/* <View className="flex-row items-center mx-5 space-x-2"> */}
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginLeft: 20,
+                marginRight: 20,
+              }}>
               <CalendarDaysIcon size="22" color="white" />
-              <Text className="text-white text-base">Daily forecast</Text>
+              {/* <Text className="text-white text-base">Daily forecast</Text> */}
+              <Text
+                style={{
+                  color: 'rgb(255, 255, 255)',
+                  fontSize: 16,
+                  lineHeight: 24,
+                }}>
+                Daily forecast
+              </Text>
             </View>
 
             {/*Process for ScrollBar(cuộn) with images when full place to contain images */}
@@ -429,7 +580,17 @@ export default function HomeScreen() {
                   <View
                     key={index}
                     className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4"
-                    style={{backgroundColor: theme.bgWhite(0.15)}}>
+                    // style={{backgroundColor: theme.bgWhite(0.15)}}>
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 96,
+                      borderRadius: 2, 
+                      marginTop: 4,
+                      backgroundColor: theme.bgWhite(0.15),
+                    }}
+                  >
                     <Image
                       /*source={require('../assets/images/heavyrain.png')}*/
                       source={weatherImages[item?.day?.condition?.text]}
