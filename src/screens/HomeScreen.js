@@ -344,7 +344,7 @@ export default function HomeScreen() {
               display: 'flex',
               justifyContent: 'space-around',
               flex: 1,
-              marginTop: 20,
+              marginTop: hp(2),
             }}>
             <View
               style={{
@@ -359,6 +359,7 @@ export default function HomeScreen() {
                   color: 'rgb(255, 255, 255)',
                   textAlign: 'center',
                   fontSize: 24,
+                  // lineHeight: 32,
                   lineHeight: 32,
                   fontWeight: '700',
                 }}>
@@ -414,7 +415,7 @@ export default function HomeScreen() {
             {/* <View className="space-y-2"> */}
             <View
               style={{
-                marginBottom: 16,
+                marginTop: hp(-1),
               }}>
               {/* <Text className="text-center font-bold text-white text-6xl ml-5 "> */}
               <Text
@@ -423,7 +424,7 @@ export default function HomeScreen() {
                   fontWeight: '700',
                   color: 'rgb(255, 255, 255)',
                   fontSize: 60,
-                  lineHeight: 1,
+                  lineHeight: hp(9),
                   marginLeft: 20,
                 }}>
                 {/*Make 23 to degree C*/}
@@ -463,7 +464,7 @@ export default function HomeScreen() {
               <View
                 style={{
                   flexDirection: 'row',
-                  marginLeft: 8,
+                  marginLeft: wp(2),
                   alignItems: 'center',
                 }}>
                 <Image
@@ -478,6 +479,7 @@ export default function HomeScreen() {
                     fontWeight: '600',
                     fontSize: 16,
                     lineHeight: 24,
+                    marginHorizontal: wp(1.5),
                   }}>
                   {/*22km*/}
                   {current?.wind_kph}km
@@ -489,7 +491,8 @@ export default function HomeScreen() {
               <View
                 style={{
                   flexDirection: 'row',
-                  marginLeft: 8,
+                  // marginLeft: 8,
+                  marginLeft: wp(2),
                   alignItems: 'center',
                 }}>
                 <Image
@@ -504,6 +507,7 @@ export default function HomeScreen() {
                     fontWeight: '600',
                     fontSize: 16,
                     lineHeight: 24,
+                    marginHorizontal: wp(1.5),
                   }}>
                   {/*23%*/}
                   {current?.humidity}%
@@ -513,7 +517,8 @@ export default function HomeScreen() {
               <View
                 style={{
                   flexDirection: 'row',
-                  marginLeft: 8,
+                  // marginLeft: 8,
+                  marginLeft: wp(2),
                   alignItems: 'center',
                 }}>
                 <Image
@@ -527,6 +532,7 @@ export default function HomeScreen() {
                     fontWeight: '600',
                     fontSize: 16,
                     lineHeight: 24,
+                    marginHorizontal: wp(1.5),
                   }}>
                   {/*6:05 AM*/}
                   {weather?.forecast?.forecastday[0]?.astro?.sunrise}
@@ -537,15 +543,17 @@ export default function HomeScreen() {
           {/*Forecast for the next days */}
           {/* <View style={{marginTop: testHeight}} className=" space-y-3"> */}
           {/* <View className=" space-y-3"> */}
-          <View style={{marginTop: 12}}>
+          <View style={{marginTop: hp(2.5)}}>
             {/*Process show icon calendar */}
             {/* <View className="flex-row items-center mx-5 space-x-2"> */}
             <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginLeft: 20,
-                marginRight: 20,
+                // marginLeft: 20,
+                // marginRight: 20,
+                marginLeft: wp(3.5),
+                marginRight: wp(3.5),
               }}>
               <CalendarDaysIcon size="22" color="white" />
               {/* <Text className="text-white text-base">Daily forecast</Text> */}
@@ -553,7 +561,8 @@ export default function HomeScreen() {
                 style={{
                   color: 'rgb(255, 255, 255)',
                   fontSize: 16,
-                  lineHeight: 24,
+                  lineHeight: hp(5),
+                  marginHorizontal: wp(2.5),
                 }}>
                 Daily forecast
               </Text>
@@ -562,7 +571,8 @@ export default function HomeScreen() {
             {/*Process for ScrollBar(cuộn) with images when full place to contain images */}
             <ScrollView
               horizontal
-              contentContainerStyle={{paddingHorizontal: 15}}
+              // contentContainerStyle={{paddingHorizontal: 15}}
+              contentContainerStyle={{paddingHorizontal: wp(5)}}
               showsHorizontalScrollIndicator={false}
               /*Làm nền viền trắng mờ*/
               keyboardShouldPersistTaps="handled">
@@ -579,29 +589,44 @@ export default function HomeScreen() {
                   /*Monday*/
                   <View
                     key={index}
-                    className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4"
+                    // className="flex justify-center items-center w-24 rounded-3xl py-3 space-y-1 mr-4"
                     // style={{backgroundColor: theme.bgWhite(0.15)}}>
                     style={{
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
                       width: 96,
-                      borderRadius: 2, 
-                      marginTop: 4,
+                      borderRadius: 24,
+                      paddingTop: 12,
+                      paddingBottom: 12,
+                      marginTop: hp(2.5),
+                      marginRight: 16,
                       backgroundColor: theme.bgWhite(0.15),
-                    }}
-                  >
+                    }}>
                     <Image
                       /*source={require('../assets/images/heavyrain.png')}*/
                       source={weatherImages[item?.day?.condition?.text]}
-                      className="h-11 w-11"
+                      // className="h-11 w-11"
+                      style={{height: 44, width: 44}}
                     />
                     {/*Chèn chữ vào viền trắng mờ*/}
-                    <Text className="text-white">
+                    {/* <Text className="text-white"> */}
+                    <Text
+                      style={{
+                        color: 'rgb(255, 255, 255)',
+                      }}>
                       {/*Monday*/} {/*{item.date}*/}
                       {dayName}
                     </Text>
-                    <Text className="text-white text-xl font-semibold">
+                    {/* <Text className="text-white text-xl font-semibold"> */}
+                    <Text
+                      style={{
+                        marginLeft: wp(2),
+                        color: 'rgb(255, 255, 255)',
+                        fontSize: 20,
+                        lineHeight: 28,
+                        fontWeight: '600',
+                      }}>
                       {/*13&#176;*/}
                       {item?.day?.avgtemp_c}&#176;
                     </Text>
